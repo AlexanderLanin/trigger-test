@@ -1,6 +1,14 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push, pull_request, workflow_dispatch, label]
+on:
+  pull_request:
+    types:
+      - closed
+      - opened
+      - reopened
+      - synchronize
+  push
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -25,5 +33,6 @@ jobs:
         run: |
           echo "git log output:"
           git log --oneline
-      - run: echo "${{ toJson(github) }}"
+      - name: Print GitHub context
+        run: echo "${{ toJson(github) }}"
       - run: echo "🔚 This is the end of the job!"
