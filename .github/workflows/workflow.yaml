@@ -19,8 +19,11 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: |
+      - name: Print the current time
+        run: echo "🕒 The current time is $(date)."
+      - name: print git log
+        run: |
           echo "git log output:"
-          git log --oneline -3
+          git log --oneline
       - run: echo "${{ toJson(github) }}"
       - run: echo "🔚 This is the end of the job!"
